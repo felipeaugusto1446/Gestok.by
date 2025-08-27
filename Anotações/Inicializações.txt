@@ -1,0 +1,15 @@
+Para adicionar o package.json basta ir na pasta do projeto, abrir no terminal, digitar npm init -y
+
+A primeira dependência é o TypeScript, adicionamos com o comando npm add typescript -D (a flag -D é porque o TS é uma dependência de desenvolvimento, então para outras dependências de dev, utilizamos -D)
+
+A segunda é o express, é um framework e utilizamos para desenvolver a API de fato, e se trata de uma dependência de produção, então usamos o comando npm add express, sem o -D
+
+Colocamos agora algumas tipagens para o TS para facilitar o desenvolvimento.
+
+Primeiro a do express: npm add @types/express -D
+Depois o TS NodeDev: npm add ts-node-dev -D
+
+Por ultimo, inicializamos o TS com o comando:
+npx -p typescript tsc --init
+
+Criamos então, um arquivo de rotas e um arquivo inicial, na raiz criamos uma pasta com o nome de src, e um arquivo chamado routes.ts

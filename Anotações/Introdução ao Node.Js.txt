@@ -1,0 +1,5 @@
+Nesta aula, abordamos a introdução ao Node.js, que é uma plataforma de código aberto para executar código JavaScript no lado do servidor. Em vez de usar o JavaScript apenas para o front end, o Node.js permite criar servidores web e APIs, tudo com a mesma linguagem.
+
+Discutimos a eficiência do Node.js, que utiliza uma arquitetura de I/O não bloqueante e orientada a eventos. Isso significa que o Node.js pode realizar operações de entrada e saída sem interromper a execução do código, permitindo que outras tarefas continuem a ser executadas enquanto uma operação está em andamento. Quando a operação é concluída, o Node.js chama a função de retorno (callback) correspondente.
+
+Além disso, falamos sobre o loop de eventos, que monitora operações em segundo plano, e o sistema de módulos que permite dividir o código em partes reutilizáveis, facilitando o uso de bibliotecas através de gerenciadores de pacotes como NPM e YARN.
