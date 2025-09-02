@@ -1,35 +1,48 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
+  // Gera o Prisma Client em TypeScript/JavaScript dentro da pasta src/generated/prisma
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
+  // Usa SQLite como banco de dados.
+  // A URL de conexão virá da variável de ambiente DATABASE_URL.
 }
 
 model User {
   id       String @id @default(uuid())
+  // Chave primária do tipo String, gerada automaticamente como UUID.
+
   name     String
   email    String
   password String
+  // Campos básicos de dados do usuário.
 
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  // Datas de criação e atualização, com valor padrão sendo o momento atual.
+  // O "?" indica que o campo pode ser nulo.
 
   @@map("users")
+  // O nome real da tabela no banco será "users".
 }
 
 model Category {
   id   String @id @default(uuid())
   name String
+  // Categoria com chave primária UUID e campo nome.
 
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  // Datas de criação e atualização.
 
   products Product[]
+  // Relacionamento 1:N → uma categoria pode ter vários produtos.
 
   @@map("categories")
+  // O nome real da tabela no banco será "categories".
 }
 
 model Product {
@@ -39,25 +52,40 @@ model Product {
   description String
   banner      String
   amount      Int
+  // Produto com informações básicas como nome, preço, descrição, imagem e quantidade.
+
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
+  // Datas de criação e atualização.
 
   category    Category @relation(fields: [category_id], references: [id])
   category_id String
+  // Relacionamento N:1 → cada produto pertence a uma categoria.
+  // O campo category_id armazena a referência.
+
   items       Item[]
+  // Relacionamento 1:N → um produto pode estar em vários itens.
 
   @@map("products")
+  // O nome real da tabela no banco será "products".
 }
 
 model Item {
   id         String    @id @default(ulid())
+  // Chave primária do tipo String, gerada automaticamente como ULID.
+
   amaunt     Int
+  // Quantidade do item (atenção: grafia correta seria "amount").
+
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
+  // Datas de criação e atualização.
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id String
+  // Relacionamento N:1 → cada item pertence a um único produto.
+  // O campo product_id guarda a referência.
 
   @@map("items")
+  // O nome real da tabela no banco será "items".
 }
-
