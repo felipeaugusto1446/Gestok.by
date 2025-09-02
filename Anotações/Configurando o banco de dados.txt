@@ -1,0 +1,7 @@
+Primeiramente configuramos o banco de dados que usaremos no projeto, colocando no arquivo .env o arquivo que usaremos de banco de dados, no caso file:./dev.db
+
+Após isso, fazemos as tabelas que iremos utilizar e suas relações no schema.prisma
+
+Depois, realizamos a criação da migração, e para gerarmos uma no prisma usamos o comando
+
+npm prisma migrate dev controle-de-estoque
