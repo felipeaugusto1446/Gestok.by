@@ -13,3 +13,26 @@ Por ultimo, inicializamos o TS com o comando:
 npx -p typescript tsc --init
 
 Criamos então, um arquivo de rotas e um arquivo inicial, na raiz criamos uma pasta com o nome de src, e um arquivo chamado routes.ts
+
+=============================================================
+
+Na aula Continuação configuração projeto, vamos instalar a biblioteca que irá tratar os erros da nossa aplicação, a express async-errors dessa fomra:
+npm add express-async-errors (no express 5 essa dependencia já vem instalada)
+
+A outra dependencia é o cors para que a api consiga comunicar com o front-end e consumir a api, precisamos liberar o cors dessa forma:
+
+npm add cors
+
+E depois, a tipagem do cors
+
+npm add @types/cors -D
+
+Agora instalamos o prisma com o comando
+
+npm add prisma
+
+npm add @prisma/client
+
+Para inicializar o prisma no projeto, usamos
+
+npx prisma init
