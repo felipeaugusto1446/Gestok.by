@@ -15,14 +15,7 @@ O objetivo é implementar uma API para gerenciamento de estoque, servindo como b
 
 ## 📂 Estrutura do projeto
 ```
-controleDeEstoque/
-│-- src/
-│   │-- routes.ts        # Definição das rotas da aplicação
-│   │-- server.ts        # Inicialização do servidor
-│
-│-- package.json         # Dependências e scripts
-│-- tsconfig.json        # Configurações do TypeScript
-│-- .gitignore           # Arquivos/pastas ignorados pelo Git
+Ainda não finalizada
 ```
 
 ---
