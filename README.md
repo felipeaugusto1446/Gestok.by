@@ -36,7 +36,7 @@ controleDeEstoque/
 ### Passo a passo
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SEU_USUARIO/controleDeEstoque.git
+   git clone https://github.com/felipeaugusto1446/curso-nodejs
    ```
 
 2. Entre na pasta do projeto:
