@@ -5,3 +5,10 @@ Depois dessa conexão, há a criação de pastas no projeto, como as de controll
 Além disso, menciona a instalação da biblioteca JSON Web Token (JWT), essencial para a autenticação de usuários, e explica como o JWT será usado para encriptar senhas. O instrutor demonstra ainda como gerar a chave de encriptação usando o MD5 Hash Generator e como adicioná-la ao arquivo de configurações de ambiente (.env).
 
 Por fim, ele apresenta um site para decodificar tokens JWT, útil para verificar informações contidas nos tokens durante o desenvolvimento. A aula conclui com a promessa de continuar a criação do 'CreateUserService' na próxima aula, onde serão abordados o uso do token JWT e o gerenciamento de senhas dos usuários.
+
+Resumindo:
+- Banco (SQLite + Prisma + BeeKeeper): guardar e visualizar dados;
+- Controllers e Services: organização do código em camadas;
+- Bcrypt: segurança de senhas;
+- JWT: autenticação baseada em tokens;
+- .env + chave secreta: segurança e boas práticas de configuração.
