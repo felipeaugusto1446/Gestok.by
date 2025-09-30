@@ -6,8 +6,8 @@
 
     // Ambiente
     "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
 
     // Tipos
     "types": ["node"],
