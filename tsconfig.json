@@ -24,6 +24,10 @@
 
     // Opções recomendadas
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    // 👇 ESSENCIAL para rodar o Express com import default
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -1,7 +1,6 @@
 {
   "name": "controledeestoque",
   "version": "1.0.0",
-  "type": "module",
   "main": "src/server.ts",
   "scripts": {
     "dev": "ts-node-dev --transpile-only src/server.ts"

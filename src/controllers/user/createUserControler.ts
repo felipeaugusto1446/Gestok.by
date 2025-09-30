@@ -1,8 +1,8 @@
 import {Request,Response} from "express"
-import { CreateUserService } from "../../services/user/CreateUserService.js"
-import { UserRequest } from "../../models/interfaces/users/UserRequest.js"
+import { CreateUserService } from "../../services/user/CreateUserService"
+import { UserRequest } from "../../models/interfaces/users/UserRequest"
 
-class userController{
+class CreateUserController{
     async handle(request: Request,response:Response)
     {
         const {name,email,password}: UserRequest = request.body;
@@ -14,4 +14,4 @@ class userController{
         return response.json(user);
     }
 }
-export {userController}
+export {CreateUserController}
