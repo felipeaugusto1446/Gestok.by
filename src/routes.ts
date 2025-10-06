@@ -1,5 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { CreateUserController } from './controllers/user/createUserControler'; 
+import { AuthUserController } from "./controllers/user/AuthUserController"
+import { isAuthenticated } from './middlewares/isAuthenticated';
+import { DetailUserController } from './controllers/user/DetailUserController';
 // Importa o Router do Express (para agrupar rotas)
 // Request e Response são tipos do TypeScript, usados apenas para tipar os parâmetros
 
@@ -19,5 +22,8 @@ router.post('/user',new CreateUserController().handle);
 //quando fizemos uma requisição com o método post usando o caminho /user, sera gerado uma instância na controller e caira no método handle
 //ele pegara as infos, irá no CreateUserService e criará o usuário
 
+router.post('/session', new AuthUserController().handle);
+
+router.get('/me',isAuthenticated,new DetailUserController().handle)
 export { router };
 // Exporta o roteador para que ele possa ser utilizado em outros arquivos

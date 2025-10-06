@@ -13,3 +13,4 @@ class AuthUserController {
         return response.json(auth);
     }
 }
+export {AuthUserController}

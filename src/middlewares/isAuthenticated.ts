@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import {} from "../models/interfaces/users/auth/Payload"
 import { Payload } from "../models/interfaces/users/auth/Payload"
 
 export function isAuthenticated(
@@ -10,11 +9,13 @@ export function isAuthenticated(
 ){
     //Acessando o JWT
     const authToken =  request.headers.authorization;
+
     if(!authToken){
         return response.status(401).end();
     }
 
-    const[,token] = authToken.split("");
+    const[,token] = authToken.split(" ");
+
     try {
         //validar token
         const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
