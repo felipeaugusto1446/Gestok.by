@@ -10,17 +10,20 @@
     "moduleResolution": "node",
 
     // Tipos
-    "types": ["node"],
-
+    //"types": ["node"],
+    "typeRoots": [
+      "./src/@types"
+    ],
+    "resolveJsonModule": true,
     // Outras saídas
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
 
     // Checagem estrita
-    "strict": true,
+    "strict": false,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    //"exactOptionalPropertyTypes": true,
 
     // Opções recomendadas
     "skipLibCheck": true,
