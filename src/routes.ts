@@ -4,6 +4,7 @@ import { AuthUserController } from "./controllers/user/AuthUserController"
 import { isAuthenticated } from './middlewares/isAuthenticated';
 import { DetailUserController } from './controllers/user/DetailUserController';
 import { RemoveUserController } from './controllers/user/RemoveUserController';
+import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 // Importa o Router do Express (para agrupar rotas)
 // Request e Response são tipos do TypeScript, usados apenas para tipar os parâmetros
 
@@ -25,8 +26,11 @@ router.post('/user',new CreateUserController().handle);
 
 router.post('/session', new AuthUserController().handle);
 
-router.get('/me',isAuthenticated,new DetailUserController().handle)
-router.delete('/user/remove',new RemoveUserController().handle)
+router.get('/me',isAuthenticated,new DetailUserController().handle);
+router.delete('/user/remove',new RemoveUserController().handle);
 
+//Category Routes
+
+router.post("/category",isAuthenticated,new CreateCategoryController().handle);
 export { router };
 // Exporta o roteador para que ele possa ser utilizado em outros arquivos
