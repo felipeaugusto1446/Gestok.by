@@ -8,10 +8,13 @@ import { CreateCategoryController } from './controllers/category/CreateCategoryC
 import { EditCategoryController } from './controllers/category/EditCategoryController';
 import { ListCategoryController } from './controllers/category/ListCategoryController';
 import { RemoveCategoryController } from './controllers/category/RemoveCategoryController';
+import multer from 'multer';
+import upLoadConfig from "./config/multer";
 // Importa o Router do Express (para agrupar rotas)
 // Request e Response são tipos do TypeScript, usados apenas para tipar os parâmetros
 
 const router = Router();
+const upload =  multer(upLoadConfig.upload("./tmp"));
 // Cria uma instância do roteador, que será usada para registrar as rotas
 
 router.get('/test', (request: Request, response: Response) => {
