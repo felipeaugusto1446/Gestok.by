@@ -37,4 +37,6 @@ router.post("/category",isAuthenticated,new CreateCategoryController().handle);
 export { router };
 router.put("/category/edit",isAuthenticated,new EditCategoryController().handle);
 router.get("/category/all",isAuthenticated, new ListCategoryController().handle)
+router.delete("/category/remove",isAuthenticated,new RemoveCategoryController().handle)
+
 // Exporta o roteador para que ele possa ser utilizado em outros arquivos
