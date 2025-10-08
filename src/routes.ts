@@ -6,6 +6,8 @@ import { DetailUserController } from './controllers/user/DetailUserController';
 import { RemoveUserController } from './controllers/user/RemoveUserController';
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 import { EditCategoryController } from './controllers/category/EditCategoryController';
+import { ListCategoryController } from './controllers/category/ListCategoryController';
+import { RemoveCategoryController } from './controllers/category/RemoveCategoryController';
 // Importa o Router do Express (para agrupar rotas)
 // Request e Response são tipos do TypeScript, usados apenas para tipar os parâmetros
 
@@ -34,4 +36,5 @@ router.delete('/user/remove',new RemoveUserController().handle);
 router.post("/category",isAuthenticated,new CreateCategoryController().handle);
 export { router };
 router.put("/category/edit",isAuthenticated,new EditCategoryController().handle);
+router.get("/category/all",isAuthenticated, new ListCategoryController().handle)
 // Exporta o roteador para que ele possa ser utilizado em outros arquivos
