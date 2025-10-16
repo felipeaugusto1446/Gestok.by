@@ -10,6 +10,7 @@ import { ListCategoryController } from './controllers/category/ListCategoryContr
 import { RemoveCategoryController } from './controllers/category/RemoveCategoryController';
 import multer from 'multer';
 import upLoadConfig from "./config/multer";
+import { CreateProductController } from './controllers/product/CreateProductController';
 // Importa o Router do Express (para agrupar rotas)
 // Request e Response são tipos do TypeScript, usados apenas para tipar os parâmetros
 
@@ -42,4 +43,7 @@ router.put("/category/edit",isAuthenticated,new EditCategoryController().handle)
 router.get("/category/all",isAuthenticated, new ListCategoryController().handle)
 router.delete("/category/remove",isAuthenticated,new RemoveCategoryController().handle)
 
+
+// Product Routes
+router.post("/product",isAuthenticated,upload.single("file"),new CreateProductController().handle)
 // Exporta o roteador para que ele possa ser utilizado em outros arquivos
