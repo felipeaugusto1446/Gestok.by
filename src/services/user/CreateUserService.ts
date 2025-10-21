@@ -1,39 +1,49 @@
-import prismaClient from '../../prisma';
-import { hash } from "bcryptjs"
-import { UserRequest } from "../../models/interfaces/users/UserRequest.ts"
+import prismaClient from '../../prisma'
+import { hash } from 'bcryptjs'
+import { UserRequest } from '../../models/interfaces/users/UserRequest'
 
-class CreateUserService{
-
-    async execute({ name,email,password }:UserRequest) {
-        if(!email){
-            throw new Error("Email Incorret");
-        }
-        const userAlreadExists =  await prismaClient.user.findFirst({
-            where: {
-                email: email
-            }
-        })
-        if(userAlreadExists){
-            throw new Error("Email already exists");
-        }
-        //Encriptando a nossa senha do usuário
-        const passwordHash =  await hash(password,8);
-
-        //Criando nosso usuário
-        const user = prismaClient.user.create({
-            data:{
-                name: name,
-                email: email,
-                password: passwordHash
-            },
-            select:{
-                id: true,
-                name: true,
-                email: true
-            }
-        })
-        return user;
+class CreateUserService {
+  async execute({ razao_social, cnpj, phone, email, password }: UserRequest) {
+    // validação básica
+    if (!email || !cnpj || !razao_social || !phone || !password) {
+      throw new Error('Todos os campos são obrigatórios.')
     }
+
+    // verifica duplicidade de email e CNPJ
+    const existingUser = await prismaClient.user.findFirst({
+      where: {
+        OR: [{ email }, { cnpj }],
+      },
+    })
+
+    if (existingUser) {
+      throw new Error('E-mail ou CNPJ já cadastrado.')
+    }
+
+    // criptografa a senha
+    const passwordHash = await hash(password, 8)
+
+    // cria o usuário no banco
+    const user = await prismaClient.user.create({
+      data: {
+        razao_social,
+        cnpj,
+        phone,
+        email,
+        password: passwordHash,
+      },
+      select: {
+        id: true,
+        razao_social: true,
+        cnpj: true,
+        phone: true,
+        email: true,
+        created_at: true,
+      },
+    })
+
+    return user
+  }
 }
 
-export {CreateUserService}
+export { CreateUserService }

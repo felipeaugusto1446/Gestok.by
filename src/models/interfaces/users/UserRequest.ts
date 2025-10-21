@@ -1,5 +1,8 @@
-export interface UserRequest{
-    name: string;
-    email: string;
-    password: string;
+export interface UserRequest {
+  razao_social: string
+  cnpj: string
+  phone: string
+  email: string
+  password: string
+  confirmPassword?: string
 }

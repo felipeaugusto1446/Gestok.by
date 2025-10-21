@@ -1,28 +1,39 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import { Payload } from "../models/interfaces/users/auth/Payload"
+
+interface Payload {
+  sub: string;
+}
+
+declare global {
+  namespace Express {
+    export interface Request {
+      user_id: string;
+    }
+  }
+}
 
 export function isAuthenticated(
-    request: Request,
-    response: Response,
-    next: NextFunction
-){
-    //Acessando o JWT
-    const authToken =  request.headers.authorization;
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  const authToken = request.headers.authorization;
 
-    if(!authToken){
-        return response.status(401).end();
-    }
+  if (!authToken) {
+    return response.status(401).json({ error: "Token ausente." });
+  }
 
-    const[,token] = authToken.split(" ");
+  const [, token] = authToken.split(" ");
 
-    try {
-        //validar token
-        const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
-        request.user_id = sub;
-        return next(); //deixa que a requisição prossiga
+  try {
+    const { sub } = verify(token, process.env.JWT_SECRET as string) as Payload;
 
-    } catch (error) {
-        return response.send(401).end();
-    }
+    // ✅ injeta o ID do usuário no request
+    request.user_id = sub;
+
+    return next();
+  } catch (err) {
+    return response.status(401).json({ error: "Token inválido." });
+  }
 }
