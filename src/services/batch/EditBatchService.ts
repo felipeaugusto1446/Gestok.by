@@ -23,7 +23,7 @@ class EditBatchService {
     quantity
   }: EditBatchRequest) {
     
-    // 1️⃣ Verifica se o lote existe
+    //  Verifica se o lote existe
     const batchExists = await prismaClient.batch.findUnique({
       where: { id },
       include: { product: true }
@@ -33,7 +33,7 @@ class EditBatchService {
       throw new Error("Lote não encontrado.");
     }
 
-    // 2️⃣ Se quiser alterar o produto, valida se ele existe
+    //  Se quiser alterar o produto, valida se ele existe
     if (product_id) {
       const productExists = await prismaClient.product.findUnique({
         where: { id: product_id }
@@ -43,7 +43,7 @@ class EditBatchService {
       }
     }
 
-    // 3️⃣ Atualiza o lote
+    // Atualiza o lote
     const updatedBatch = await prismaClient.batch.update({
       where: { id },
       data: {

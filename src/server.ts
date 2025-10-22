@@ -1,5 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
 import { router } from './routes'
+import cors from "cors"
+import swaggerUi from "swagger-ui-express"
+import swaggerDocument from"../swagger.json"
 // Importa o Express para criar o servidor
 // Importa o roteador definido no arquivo routes.ts
 
@@ -12,7 +15,11 @@ const port = 3333;
 app.use(express.json());
 // Configura o servidor para aceitar requisições com corpo em formato JSON
 
-app.use(router);
+app.use(cors());
+
+app.use("/v1", router);
+
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
 // Adiciona as rotas definidas em routes.ts ao servidor
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {

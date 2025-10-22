@@ -16,7 +16,7 @@ class CreateProductController {
       // extrai o nome do arquivo
       const { originalname, filename: banner } = request.file
 
-      // 🧱 Cria o produto
+      //  Cria o produto
       const product = await createProductService.execute({
         name,
         price,
