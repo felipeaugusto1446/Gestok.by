@@ -5,7 +5,7 @@
     "description": "Esta API tem como objetivo o controle de estoque completo do sistema Gestok.by.",
     "termsOfService": "http://localhost:3333/terms",
     "contact": {
-      "email": "yourEmail@outlook.com"
+      "email": "felipeaugusto.2439@gmail.com"
     },
     "version": "1.0.0"
   },
@@ -14,16 +14,19 @@
       "post": {
         "description": "Criar usuário",
         "requestBody": {
-          "description": "Dados necessários para a criação de um novo usuário",
+          "description": "Dados necessários para criar um novo usuário",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/RequestCreateUser"
               },
               "example": {
-                "name": "Felipe",
+                "razao_social": "Laticínio Boa Esperança LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "phone": "(35) 98888-7777",
                 "email": "teste@gmail.com",
-                "password": "123456"
+                "password": "123456",
+                "confirmPassword": "123456"
               }
             }
           }
@@ -91,6 +94,44 @@
         }
       }
     },
+    "/v1/user/edit": {
+      "put": {
+        "description": "Editar dados do usuário (razão social, CNPJ, telefone ou e-mail)",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "description": "Campos que podem ser alterados: razao_social, cnpj, phone, email",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestEditUser"
+              },
+              "example": {
+                "user_id": "b9f4d87a-84a3-4bc8-8a2b-654321fabc12",
+                "razao_social": "Laticínio Boa Esperança LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "phone": "(35) 98888-7777",
+                "email": "teste@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseEditUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro ao atualizar usuário"
+          }
+        }
+      }
+    },
     "/v1/user/remove": {
       "delete": {
         "description": "Remover usuário autenticado",
@@ -133,31 +174,6 @@
         }
       }
     },
-    "/v1/category/edit": {
-      "put": {
-        "description": "Editar uma categoria existente",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "Dados necessários para editar categoria",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestCreateCategory"
-              },
-              "example": {
-                "id": "b9f4d87a-84a3-4bc8-8a2b-654321fabc12",
-                "name": "Derivados de Leite"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Categoria atualizada com sucesso"
-          }
-        }
-      }
-    },
     "/v1/category/all": {
       "get": {
         "description": "Lista todas as categorias",
@@ -166,28 +182,6 @@
           "200": {
             "description": "Categorias listadas com sucesso"
           }
-        }
-      }
-    },
-    "/v1/category/remove": {
-      "delete": {
-        "description": "Remover categoria",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "ID da categoria a ser removida",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string", "example": "4e59f8e5-931a-4d99-930d-a5c6f96a12e2" }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Categoria removida com sucesso" }
         }
       }
     },
@@ -210,56 +204,6 @@
         }
       }
     },
-    "/v1/product/edit": {
-      "put": {
-        "description": "Editar um produto existente",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "Dados necessários para editar produto",
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestEditProduct"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Produto atualizado com sucesso" }
-        }
-      }
-    },
-    "/v1/product/all": {
-      "get": {
-        "description": "Lista todos os produtos cadastrados",
-        "security": [{ "bearerAuth": [] }],
-        "responses": {
-          "200": { "description": "Produtos listados com sucesso" }
-        }
-      }
-    },
-    "/v1/product/remove": {
-      "delete": {
-        "description": "Remove um produto pelo ID",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "ID do produto a ser removido",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string", "example": "8b226736-5cee-475e-9b89-59bb766059cd" }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Produto removido com sucesso" }
-        }
-      }
-    },
     "/v1/batch": {
       "post": {
         "description": "Criar novo lote",
@@ -279,47 +223,6 @@
         }
       }
     },
-    "/v1/batch/edit": {
-      "put": {
-        "description": "Editar lote existente",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "Dados necessários para editar um lote",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RequestEditBatch"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Lote atualizado com sucesso" }
-        }
-      }
-    },
-    "/v1/batch/remove": {
-      "delete": {
-        "description": "Remover lote",
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "description": "ID do lote a ser removido",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string", "example": "4a123456-5cee-475e-9b89-59bb766059cd" }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Lote removido com sucesso" }
-        }
-      }
-    },
     "/v1/notifications": {
       "get": {
         "description": "Verifica notificações de validade de lotes",
@@ -335,16 +238,21 @@
       "RequestCreateUser": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
+          "razao_social": { "type": "string" },
+          "cnpj": { "type": "string" },
+          "phone": { "type": "string" },
           "email": { "type": "string" },
-          "password": { "type": "string" }
+          "password": { "type": "string" },
+          "confirmPassword": { "type": "string" }
         }
       },
       "ResponseCreateUser": {
         "type": "object",
         "properties": {
           "id": { "type": "string" },
-          "name": { "type": "string" },
+          "razao_social": { "type": "string" },
+          "cnpj": { "type": "string" },
+          "phone": { "type": "string" },
           "email": { "type": "string" }
         }
       },
@@ -359,9 +267,29 @@
         "type": "object",
         "properties": {
           "id": { "type": "string" },
-          "name": { "type": "string" },
+          "razao_social": { "type": "string" },
           "email": { "type": "string" },
           "token": { "type": "string" }
+        }
+      },
+      "RequestEditUser": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "string" },
+          "razao_social": { "type": "string" },
+          "cnpj": { "type": "string" },
+          "phone": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+      "ResponseEditUser": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "razao_social": { "type": "string" },
+          "cnpj": { "type": "string" },
+          "phone": { "type": "string" },
+          "email": { "type": "string" }
         }
       },
       "RequestCreateCategory": {
@@ -386,29 +314,12 @@
           "file": { "type": "string", "format": "binary" }
         }
       },
-      "RequestEditProduct": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "name": { "type": "string" },
-          "price": { "type": "number" },
-          "description": { "type": "string" },
-          "file": { "type": "string", "format": "binary" }
-        }
-      },
       "RequestCreateBatch": {
         "type": "object",
         "properties": {
           "product_id": { "type": "string" },
           "brand": { "type": "string" },
           "quantity": { "type": "number" }
-        }
-      },
-      "RequestEditBatch": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "brand": { "type": "string" }
         }
       }
     },
