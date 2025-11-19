@@ -15,8 +15,7 @@ O objetivo é implementar uma API para gerenciamento de estoque, servindo como b
 
 ## 📂 Estrutura do projeto
 ```
-Ainda não finalizada
-```
+Realizando modicações finais```
 
 ---
 
